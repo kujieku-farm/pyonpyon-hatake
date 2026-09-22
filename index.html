@@ -1,95 +1,41 @@
-<!doctype html>
-<html lang="ja">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#f7f3ea">
-<title>ぴょんぴょん畑</title>
-<link rel="manifest" href="manifest.json">
+<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#f7f3ea"><title>ぴょんぴょん畑</title><link rel="manifest" href="manifest.json">
 <style>
-:root{--paper:#f7f3ea;--ink:#30322c;--muted:#77786f;--green:#627b58;--pale:#e5ebde;--card:#fffdf8;--line:#ded9ce;--note:#f1ecdf}
-*{box-sizing:border-box} body{margin:0;background:var(--paper);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",sans-serif}
-.app{max-width:520px;margin:auto;min-height:100vh;padding:26px 20px 105px}
-h1{font-family:"Yu Mincho","Hiragino Mincho ProN",serif;font-size:28px;letter-spacing:.04em;margin:0 0 7px} h2{font-size:19px;margin:0 0 12px}
-.small,.meta{font-size:13px;color:var(--muted);line-height:1.65}.screen{display:none}.screen.active{display:block}
-.hero,.observe{background:var(--pale);border-radius:20px;padding:20px 18px;margin:24px 0}
-.card,.item,.wisdom{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:15px;margin:10px 0}
-button{font:inherit;cursor:pointer}.primary,.secondary,.choice{width:100%;border-radius:999px;padding:15px;font-weight:700;margin-top:10px}
-.primary{border:0;background:var(--green);color:#fff}.secondary{border:1px solid var(--green);background:transparent;color:#53684c}.choice{border:1px solid var(--line);background:var(--card)}
-.back{border:0;background:none;color:#52634c;padding:0;margin-bottom:18px}.preview{width:100%;max-height:350px;object-fit:cover;border-radius:18px;margin:15px 0;background:#e8e5dc}
-.list{display:grid;gap:8px;margin:14px 0}.item{text-align:left;width:100%;margin:0}.selected{border:2px solid var(--green);background:#edf2e9}
-textarea{width:100%;min-height:105px;border:1px solid var(--line);border-radius:15px;padding:13px;font:inherit;background:var(--card);color:var(--ink);resize:vertical}
-.wisdom{background:var(--note);line-height:1.75}.check{display:block;background:var(--card);border:1px solid var(--line);border-radius:13px;padding:12px;margin:8px 0}
-.summary{background:#edf2e9;border-radius:17px;padding:17px;line-height:1.8}.split{display:grid;gap:9px;margin-top:18px}
-.consult{background:var(--card);border:1px solid var(--line);border-radius:17px;padding:16px;white-space:pre-wrap;line-height:1.7;font-size:14px}
-.ok{background:#edf2e9;border-radius:13px;padding:12px;margin:12px 0;font-size:14px;display:none}
-.record{border-left:3px solid #839477;padding-left:13px}.record b{font-size:16px}.notice{background:#f1ecdf;border-radius:14px;padding:13px;margin:14px 0;font-size:13px;line-height:1.7}
-nav{position:fixed;bottom:0;left:0;right:0;background:#f7f3eaf2;border-top:1px solid var(--line);backdrop-filter:blur(10px)}
-.nav{max-width:520px;margin:auto;display:grid;grid-template-columns:repeat(3,1fr);padding:8px 12px calc(8px + env(safe-area-inset-bottom))}
-.nav button{border:0;background:none;color:#596356;padding:5px}
-</style>
-</head>
-<body><main class="app">
+:root{--bg:#f7f3ea;--card:#fffdf8;--ink:#30322c;--muted:#77786f;--g:#607b55;--pale:#e7ecdf;--line:#ded9ce;--future:#f5ecd0}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",sans-serif}.app{max-width:540px;margin:auto;padding:25px 18px 105px;min-height:100vh}h1{font-family:"Yu Mincho","Hiragino Mincho ProN",serif;font-size:27px;margin:0 0 7px}h2{font-size:18px;margin:22px 0 10px}.small,.meta{font-size:13px;color:var(--muted);line-height:1.65}.screen{display:none}.active{display:block}.hero,.note{background:var(--pale);border-radius:20px;padding:19px;margin:20px 0}.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px;margin:10px 0}button{font:inherit;cursor:pointer}.primary,.secondary,.choice{width:100%;border-radius:999px;padding:14px;font-weight:700;margin-top:10px}.primary{border:0;background:var(--g);color:white}.secondary{border:1px solid var(--g);background:transparent;color:#52684b}.choice{border:1px solid var(--line);background:var(--card)}.back{border:0;background:none;color:#52684b;padding:0;margin-bottom:18px}.badge{display:inline-block;border-radius:999px;padding:4px 9px;font-size:11px;font-weight:700}.done{background:#dfe9d8;color:#46603e}.future{background:var(--future);color:#79682f}.field{background:#fffaf0;border:1px solid var(--line);border-radius:20px;padding:13px;margin:14px 0}.beds{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;min-height:390px}.bed{border:5px solid #718b64;background:#f7f4e9;padding:5px;display:flex;flex-direction:column;justify-content:space-around;text-align:center}.plant{border:0;background:transparent;font-size:11px;padding:5px 1px}.plant span{display:block;font-size:23px}.plant.wait{opacity:.55;border:1px dashed #78936c;border-radius:9px}.veggrid{display:grid;grid-template-columns:repeat(2,1fr);gap:9px}.vegcard{border:1px solid var(--line);background:var(--card);border-radius:16px;padding:12px;text-align:left}.emoji{font-size:29px;display:block}.photoempty{height:210px;border:1px dashed #9ca793;border-radius:18px;display:flex;align-items:center;justify-content:center;text-align:center;color:var(--muted);margin:14px 0;padding:20px}.latest,.preview{width:100%;max-height:350px;object-fit:cover;border-radius:18px;margin:14px 0}.cheer{background:#f5eedb;border-radius:17px;padding:16px;line-height:1.75;margin:15px 0}.list{display:grid;gap:8px;margin:14px 0}.item{width:100%;text-align:left;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:13px}.selected{border:2px solid var(--g);background:#edf2e9}textarea{width:100%;min-height:100px;border:1px solid var(--line);border-radius:15px;padding:12px;font:inherit;background:var(--card)}.check{display:block;background:var(--card);border:1px solid var(--line);border-radius:13px;padding:12px;margin:8px 0}.summary,.consult{background:#edf2e9;border-radius:17px;padding:16px;line-height:1.75;white-space:pre-wrap}.ok{display:none;background:#edf2e9;border-radius:13px;padding:12px;margin:12px 0}.timeline{border-left:2px solid #a5b19d;margin-left:8px;padding-left:14px}.entry{margin-bottom:16px}nav{position:fixed;bottom:0;left:0;right:0;background:#f7f3eaf2;border-top:1px solid var(--line)}.nav{max-width:540px;margin:auto;display:grid;grid-template-columns:repeat(3,1fr);padding:8px 12px calc(8px + env(safe-area-inset-bottom))}.nav button{border:0;background:none;color:#596356}
+</style></head><body><main class="app">
+<section id="home" class="screen active"><h1>ぴょんぴょん畑 🌱</h1><div class="small">小さな変化に、気づく。残す。育てる。</div><div class="hero">今日も、畑をのぞいてみよう。<br>きっと、何かが見つかる。<button class="primary" onclick="show('menu')">📷 写真を撮って相談</button></div><div class="card"><b>🌿 2026年 秋の畑</b><div class="meta">15㎡（300 × 500cm）</div><p>作付け済み 9種類 ／ 10月4日予定 5種類</p><button class="secondary" onclick="field()">作付け計画を見る →</button></div></section>
 
-<div id="home" class="screen active">
-<h1>ぴょんぴょん畑 🌱</h1><div class="small">小さな変化に、気づく。残す。育てる。</div>
-<div class="hero">今日も、畑をのぞいてみよう。<br>きっと、何かが見つかる。<button class="primary" onclick="show('menu')">📷 写真を撮って相談</button></div>
-<h2>今日、見ておきたいこと</h2>
-<div class="card"><b>🥕 大根</b><div class="meta">9月6日 種まき</div>葉だけでなく、中心の新しい芽も見てみよう。</div>
-<div class="card"><b>🥦 ブロッコリー</b><div class="meta">9月20日 植え付け</div>葉と株元を観察。</div>
-</div>
+<section id="field" class="screen"><h1>わたしの畑 🌱</h1><div class="small">2026年 秋 作付け計画　・　300 × 500cm</div><div class="note">野菜をタップすると、その野菜のページへ移動します。</div><div class="field"><div class="small" style="text-align:center">北 ↑</div><div class="beds">
+<div class="bed"><button class="plant" onclick="veg('ブロッコリー')"><span>🥦</span>ブロッコリー</button><button class="plant" onclick="veg('晩生キャベツ')"><span>🥬</span>晩生キャベツ</button><button class="plant" onclick="veg('玉レタス')"><span>🥬</span>玉レタス</button><button class="plant" onclick="veg('立生レタス')"><span>🌿</span>立生レタス</button></div>
+<div class="bed"><button class="plant" onclick="veg('青首大根')"><span>🌱</span>青首大根</button><button class="plant" onclick="veg('長ネギ')"><span>🌿</span>長ネギ</button></div>
+<div class="bed"><button class="plant" onclick="veg('ごぼう')"><span>🌱</span>ごぼう</button><button class="plant" onclick="veg('洋にんじん')"><span>🥕</span>洋にんじん</button><button class="plant" onclick="veg('金時にんじん')"><span>🥕</span>金時にんじん</button></div>
+<div class="bed"><button class="plant wait" onclick="veg('カブ')"><span>○</span>カブ</button><button class="plant wait" onclick="veg('ほうれん草')"><span>○</span>ほうれん草</button><button class="plant wait" onclick="veg('食べて菜')"><span>○</span>食べて菜</button><button class="plant wait" onclick="veg('チンゲン菜')"><span>○</span>チンゲン菜</button><button class="plant wait" onclick="veg('水菜')"><span>○</span>水菜</button></div></div><p class="small">● 作付け済み　○ 10/4 作付け予定</p></div><h2>野菜たち</h2><div id="vegGrid" class="veggrid"></div></section>
 
-<div id="menu" class="screen"><button class="back" onclick="show('home')">← 今日へ戻る</button><h1>写真で相談する</h1>
-<div class="card"><b>📷 今、畑で撮る</b><button class="choice" onclick="cam.click()">カメラを開く</button></div>
-<div class="card"><b>🖼️ すでに撮った写真を使う</b><button class="choice" onclick="lib.click()">写真ライブラリから選ぶ</button></div>
-<input id="cam" type="file" accept="image/*" capture="environment" hidden><input id="lib" type="file" accept="image/*" hidden>
-<div class="notice">写真は相談中だけ表示します。ぴょんぴょん畑には保存しません。写真そのものは、これまで通りiPhone／iCloud写真にお任せします。</div></div>
+<section id="veg" class="screen"><button class="back" onclick="show('field')">← 畑へ戻る</button><h1 id="vtitle"></h1><div id="vstatus"></div><div id="latest"></div><button class="primary" onclick="photo.click()">📷 最新の一枚を更新</button><input id="photo" type="file" accept="image/*" hidden><button class="secondary" onclick="recordFromVeg()">✎ この野菜を記録・相談</button><div id="cheer" class="cheer"></div><h2>これまでの記録</h2><div id="vrecords"></div></section>
 
-<div id="choose" class="screen"><button class="back" onclick="show('menu')">← 写真を選び直す</button><h1>どの野菜ですか？</h1><img id="p1" class="preview"><div id="crops" class="list"></div><button id="next" class="primary" disabled onclick="notice()">この作物で次へ →</button></div>
-
-<div id="notice" class="screen"><button class="back" onclick="show('choose')">← 作物を選び直す</button><h1>どんなことに気づきましたか？</h1><img id="p2" class="preview"><div id="issues" class="list"></div>
-<textarea id="memo" placeholder="例：葉っぱに小さな穴がたくさん開いている"></textarea><p class="small">iPhoneキーボードのマイクでも入力できます 🎙️</p>
-<button class="primary" onclick="observe()">今日の観察ポイントを見る →</button></div>
-
-<div id="obs" class="screen"><button class="back" onclick="show('notice')">← 気づきを書き直す</button><h1>もう少し、一緒に見てみよう。</h1><img id="p3" class="preview"><div id="wisdom"></div><div id="points" class="observe"></div>
-<h2>見られたところに ✓</h2><div id="checks"></div><button class="primary" onclick="prepare()">相談の準備をする →</button></div>
-
-<div id="ready" class="screen"><button class="back" onclick="show('obs')">← 観察に戻る</button><h1>相談の準備ができました 🌱</h1><img id="p4" class="preview"><div id="summary" class="summary"></div>
-<div class="split"><button class="primary" onclick="saveRecord()">📝 今日の記録として残す</button><button class="secondary" onclick="toConsult()">🌱 チャッピーに相談する</button></div>
-<div id="saveMsg" class="ok">記録しました。文字の記録だけを、この端末内に仮保存しました 🌱</div>
-<div class="notice">Ver.0.2-Aでは、記録はこの端末のブラウザ内に仮保存します。写真は保存しません。ブラウザデータを削除すると記録も消える可能性があります。</div></div>
-
-<div id="consult" class="screen"><button class="back" onclick="show('ready')">← 相談準備へ戻る</button><h1>チャッピーに相談する 🌱</h1>
-<p class="small">下の相談メモをコピーしてChatGPTを開きます。写真はChatGPT側で同じ写真を選んで添付してください。</p><div id="consultText" class="consult"></div>
-<button class="primary" onclick="copyMemo()">相談メモをコピー</button><div id="copyMsg" class="ok">コピーしました。ChatGPTで貼り付けて、写真を添付してね。</div>
-<button class="secondary" onclick="window.open('https://chatgpt.com/','_blank')">ChatGPTを開く ↗</button>
-<p class="small">まずはこの手順を実際の畑で使ってみます。「移動が面倒」と感じたら、それが将来AIを直接つなぐ判断材料になります。</p></div>
-
-<div id="records" class="screen"><h1>畑の記録</h1><div class="small">気づいたことを、少しずつ。</div><div id="recordList"></div>
-<div class="notice">ここに保存されるのは文字情報だけです。今は試作段階の「仮の記憶」です。</div></div>
-
-</main>
-<nav><div class="nav"><button onclick="show('home')">⌂<br>今日</button><button onclick="show('home')">♧<br>畑</button><button onclick="renderRecords();show('records')">▤<br>記録</button></div></nav>
-
+<section id="menu" class="screen"><button class="back" onclick="show('home')">← 今日へ戻る</button><h1>写真で相談する</h1><button class="choice" onclick="cam.click()">📷 今、畑で撮る</button><button class="choice" onclick="lib.click()">🖼️ すでに撮った写真を使う</button><input id="cam" type="file" accept="image/*" capture="environment" hidden><input id="lib" type="file" accept="image/*" hidden><div class="note small">相談写真は保存しません。「最新の一枚」は野菜ページから別に登録します。</div></section>
+<section id="choose" class="screen"><button class="back" onclick="show('menu')">← 戻る</button><h1>どの野菜ですか？</h1><img id="p1" class="preview"><div id="crops" class="list"></div><button id="next" class="primary" disabled onclick="issueScreen()">次へ →</button></section>
+<section id="issue" class="screen"><button class="back" onclick="show('choose')">← 戻る</button><h1>どんなことに気づきましたか？</h1><img id="p2" class="preview"><div id="issues" class="list"></div><textarea id="memo" placeholder="気づいたことをひとこと"></textarea><button class="primary" onclick="observe()">観察ポイントを見る →</button></section>
+<section id="obs" class="screen"><button class="back" onclick="show('issue')">← 戻る</button><h1>もう少し、一緒に見てみよう。</h1><img id="p3" class="preview"><div id="wisdom"></div><div id="checks"></div><button class="primary" onclick="prepare()">相談の準備をする →</button></section>
+<section id="ready" class="screen"><button class="back" onclick="show('obs')">← 戻る</button><h1>相談の準備ができました 🌱</h1><img id="p4" class="preview"><div id="summary" class="summary"></div><button class="primary" onclick="saveRec()">📝 今日の記録として残す</button><button class="secondary" onclick="consult()">🌱 チャッピーに相談する</button><div id="saved" class="ok">記録しました 🌱</div></section>
+<section id="consult" class="screen"><button class="back" onclick="show('ready')">← 戻る</button><h1>チャッピーに相談する 🌱</h1><div id="ctext" class="consult"></div><button class="primary" onclick="copyText()">相談メモをコピー</button><div id="copied" class="ok">コピーしました 👍</div><button class="secondary" onclick="window.open('https://chatgpt.com/','_blank')">ChatGPTを開く ↗</button></section>
+<section id="records" class="screen"><h1>畑の記録</h1><div id="allrecords"></div></section>
+</main><nav><div class="nav"><button onclick="show('home')">⌂<br>今日</button><button onclick="field()">♧<br>畑</button><button onclick="renderAll();show('records')">▤<br>記録</button></div></nav>
 <script>
-const C=['大根','長ネギ','ごぼう','洋ニンジン','金時ニンジン','ブロッコリー','晩生キャベツ','玉レタス','立生レタス'];
-const I=['葉に穴がある','虫を見つけた','葉の色がおかしい','元気がない・育ちが遅い','株が混み合っている','その他'];
-let crop='',issue='',url='',checked=[];
-const cam=document.getElementById('cam'),lib=document.getElementById('lib');
-function show(x){document.querySelectorAll('.screen').forEach(e=>e.classList.remove('active'));document.getElementById(x).classList.add('active');scrollTo(0,0)}
-function render(a,id,type){let b=document.getElementById(id);b.innerHTML='';a.forEach(n=>{let x=document.createElement('button');x.className='item '+((type==='c'?crop:issue)===n?'selected':'');x.textContent=n;x.onclick=()=>{if(type==='c'){crop=n;next.disabled=false}else issue=n;render(a,id,type)};if(type==='c')x.onclick=()=>{crop=n;next.disabled=false;render(a,id,type)};b.appendChild(x)})}
-function file(e){let f=e.target.files[0];if(!f)return;if(url)URL.revokeObjectURL(url);url=URL.createObjectURL(f);['p1','p2','p3','p4'].forEach(x=>document.getElementById(x).src=url);crop='';next.disabled=true;render(C,'crops','c');show('choose')}
-cam.onchange=file;lib.onchange=file;
-function notice(){issue='';render(I,'issues','i');show('notice')}
-function observe(){let pts=['新しい葉や芽は元気？','葉の裏に虫や卵はいない？','周りの株と比べて違いはある？'];wisdom.innerHTML='';
-if(crop==='大根'){wisdom.innerHTML='<div class="wisdom"><b>🌱 ぴょんぴょん畑で教わったこと</b><br>先生からのアドバイス：外側の葉が多少食べられていても、まず中心の新しい芽（生長点）が無事か見てみよう。中心部の食害は生育や根の形に影響することがあるので早めに観察。</div>';pts=['中心の新しい芽（生長点）は無事？','葉の裏に小さな幼虫や卵はいない？','新しい葉にも食害が広がっていない？','株同士が混み合っていない？ 間引きが必要そう？','残す候補は、葉の形が比較的整い、茎がしっかりしている？']}
-points.innerHTML='<b>🌿 今日の観察ポイント</b><ul>'+pts.map(x=>'<li>'+x+'</li>').join('')+'</ul>';checks.innerHTML=pts.map(x=>'<label class="check"><input type="checkbox" value="'+x+'"> '+x+'</label>').join('');show('obs')}
-function prepare(){checked=[...document.querySelectorAll('#checks input:checked')].map(x=>x.value);summary.innerHTML='<b>'+crop+'</b><br>気づき：'+(issue||'自由記入')+'<br>メモ：'+(memo.value.trim()||'なし')+'<br>確認できたこと：'+(checked.length?checked.join('／'):'まだなし');saveMsg.style.display='none';show('ready')}
-function consultation(){let sow=crop==='大根'?'9月6日に種をまきました。':'';return `ぴょんぴょん畑の相談です。\n\n作物：${crop}\n${sow}\n気づき：${issue||'自由記入'}\nメモ：${memo.value.trim()||'なし'}\n確認できたこと：${checked.length?checked.join('／'):'まだ確認できていません'}\n\n写真も添付します。この状態について、写真だけで断定せず、まず次にどこを観察すればよいか教えてください。必要なら追加で撮るべき場所も教えてください。対応が必要な場合は、初心者にも分かるように理由と優先順位を教えてください。農薬については、製品名や現在の日本での登録内容を確認せずに具体的な使用方法を断定しないでください。`}
-function toConsult(){consultText.textContent=consultation();copyMsg.style.display='none';show('consult')}
-async function copyMemo(){try{await navigator.clipboard.writeText(consultation());copyMsg.style.display='block'}catch(e){alert('コピーできませんでした。相談メモを長押ししてコピーしてください。')}}
-function saveRecord(){let arr=JSON.parse(localStorage.getItem('pyonRecords')||'[]');arr.unshift({date:new Date().toLocaleDateString('ja-JP'),crop,issue:issue||'自由記入',memo:memo.value.trim(),checked});localStorage.setItem('pyonRecords',JSON.stringify(arr));saveMsg.style.display='block'}
-function renderRecords(){let arr=JSON.parse(localStorage.getItem('pyonRecords')||'[]');recordList.innerHTML=arr.length?arr.map(r=>`<div class="card record"><b>${r.crop}</b><div class="meta">${r.date}</div><div>${r.issue}</div>${r.memo?'<div class="small">'+r.memo+'</div>':''}<div class="small">確認：${r.checked&&r.checked.length?r.checked.join('／'):'なし'}</div></div>`).join(''):'<div class="hero">まだ記録はありません。<br>畑で気づいたことから、少しずつ残していこう。</div>'}
-render(C,'crops','c');
-</script>
-</body></html>
+const P={'青首大根':['9/6','done','🌱'],'長ネギ':['9/6','done','🌿'],'ごぼう':['9/6','done','🌱'],'洋にんじん':['9/6','done','🥕'],'金時にんじん':['9/6','done','🥕'],'ブロッコリー':['9/20','done','🥦'],'晩生キャベツ':['9/20','done','🥬'],'玉レタス':['9/20','done','🥬'],'立生レタス':['9/20','done','🌿'],'カブ':['10/4予定','future','🌱'],'ほうれん草':['10/4予定','future','🌿'],'食べて菜':['10/4予定','future','🌿'],'チンゲン菜':['10/4予定','future','🥬'],'水菜':['10/4予定','future','🌿']};
+const I=['葉に穴がある','虫を見つけた','葉の色がおかしい','元気がない・育ちが遅い','株が混み合っている','その他'];let crop='',problem='',url='',checked=[],cur='';
+function show(id){document.querySelectorAll('.screen').forEach(x=>x.classList.remove('active'));document.getElementById(id).classList.add('active');scrollTo(0,0)}
+function field(){vegGrid.innerHTML=Object.keys(P).map(n=>`<button class="vegcard" onclick="veg('${n}')"><span class="emoji">${P[n][2]}</span><b>${n}</b><br><span class="badge ${P[n][1]}">${P[n][1]=='done'?'作付け済み':'これから'}</span><div class="meta">${P[n][0]}</div></button>`).join('');show('field')}
+function records(){return JSON.parse(localStorage.getItem('pyonRecords')||'[]')}
+function veg(n){cur=n;vtitle.textContent=P[n][2]+' '+n;vstatus.innerHTML=`<span class="badge ${P[n][1]}">${P[n][1]=='done'?'作付け済み':'これから作付け'}</span> <span class="meta">${P[n][0]}</span>`;let pic=localStorage.getItem('pic_'+n);latest.innerHTML=pic?`<img class="latest" src="${pic}"><div class="meta">いまの ${n} ・ 最新の一枚</div>`:`<div class="photoempty">📷<br>まだ「最新の一枚」はありません。<br>育っている今を、一枚だけ残してみよう。</div>`;let rr=records().filter(x=>x.crop==n);vrecords.innerHTML=rr.length?'<div class="timeline">'+rr.map(x=>`<div class="entry"><b>${x.date}</b><br>${x.problem}${x.memo?'<div class="small">'+x.memo+'</div>':''}</div>`).join('')+'</div>':'<div class="card small">まだ記録はありません。</div>';cheer.innerHTML=P[n][1]=='future'?'🌱 <b>これからのお楽しみ。</b><br>10月4日から、この野菜の物語が始まります。':rr.length?'🌱 <b>いい観察です。</b><br>小さな変化をちゃんと見つけて残せています。次の一枚も楽しみですね 😊':'🌱 <b>ここから育ちの記録が始まります。</b><br>まずは「いまの一枚」を残して、一緒に成長を愛でていきましょう 😊';show('veg')}
+photo.onchange=e=>{let f=e.target.files[0];if(!f)return,r=new FileReader();r.onload=q=>{let im=new Image();im.onload=()=>{let s=Math.min(1,800/Math.max(im.width,im.height)),c=document.createElement('canvas');c.width=im.width*s;c.height=im.height*s;c.getContext('2d').drawImage(im,0,0,c.width,c.height);try{localStorage.setItem('pic_'+cur,c.toDataURL('image/jpeg',.58));veg(cur)}catch(err){alert('写真を保存できませんでした。保存容量が不足している可能性があります。')}};im.src=q.target.result};r.readAsDataURL(f)}
+function renderChoices(a,id,type){let b=document.getElementById(id);b.innerHTML='';a.forEach(n=>{let x=document.createElement('button');x.className='item '+((type=='crop'?crop:problem)==n?'selected':'');x.textContent=n;x.onclick=()=>{if(type=='crop'){crop=n;next.disabled=false}else problem=n;renderChoices(a,id,type)};if(type=='crop')x.onclick=()=>{crop=n;next.disabled=false;renderChoices(a,id,type)};b.appendChild(x)})}
+function pick(e){let f=e.target.files[0];if(!f)return;if(url)URL.revokeObjectURL(url);url=URL.createObjectURL(f);[p1,p2,p3,p4].forEach(x=>x.src=url);renderChoices(Object.keys(P),'crops','crop');next.disabled=!crop;show('choose')}cam.onchange=pick;lib.onchange=pick;
+function recordFromVeg(){crop=cur;show('menu')}function issueScreen(){problem='';renderChoices(I,'issues','problem');show('issue')}
+function observe(){let pts=['新しい葉や芽は元気？','葉の裏に虫や卵はいない？','周りの株と比べて違いはある？'];wisdom.innerHTML='';if(crop=='青首大根'){wisdom.innerHTML='<div class="note"><b>🌱 ぴょんぴょん畑で教わったこと</b><br>外側の葉が多少食べられていても、まず中心の新しい芽（生長点）が無事か見てみよう。</div>';pts=['中心の新しい芽（生長点）は無事？','葉の裏に小さな幼虫や卵はいない？','新しい葉にも食害が広がっていない？','株が混み合っていない？']}checks.innerHTML=pts.map(x=>`<label class="check"><input type="checkbox" value="${x}"> ${x}</label>`).join('');show('obs')}
+function prepare(){checked=[...document.querySelectorAll('#checks input:checked')].map(x=>x.value);summary.innerHTML=`<b>${crop}</b><br>気づき：${problem||'自由記入'}<br>メモ：${memo.value.trim()||'なし'}<br>確認：${checked.length?checked.join('／'):'まだなし'}`;saved.style.display='none';show('ready')}
+function text(){return `ぴょんぴょん畑の相談です。\n\n作物：${crop}\n作付け：${P[crop][0]}\n気づき：${problem||'自由記入'}\nメモ：${memo.value.trim()||'なし'}\n確認できたこと：${checked.length?checked.join('／'):'まだ確認できていません'}\n\n写真も添付します。写真だけで断定せず、次にどこを観察すればよいか教えてください。良い状態や成長している点があれば、根拠と一緒に応援コメントもお願いします。必要な対応は初心者向けに優先順位をつけてください。農薬は現在の日本での登録内容を確認せず具体的な使用方法を断定しないでください。`}
+function consult(){ctext.textContent=text();copied.style.display='none';show('consult')}async function copyText(){try{await navigator.clipboard.writeText(text());copied.style.display='block'}catch(e){alert('相談メモを長押ししてコピーしてください。')}}
+function saveRec(){let a=records();a.unshift({date:new Date().toLocaleDateString('ja-JP'),crop,problem:problem||'自由記入',memo:memo.value.trim(),checked});localStorage.setItem('pyonRecords',JSON.stringify(a));saved.style.display='block'}
+function renderAll(){let a=records();allrecords.innerHTML=a.length?a.map(x=>`<div class="card" onclick="veg('${x.crop}')"><b>${x.crop}</b><div class="meta">${x.date}</div>${x.problem}${x.memo?'<div class="small">'+x.memo+'</div>':''}</div>`).join(''):'<div class="hero">まだ記録はありません。</div>'}
+renderChoices(Object.keys(P),'crops','crop');
+</script></body></html>
