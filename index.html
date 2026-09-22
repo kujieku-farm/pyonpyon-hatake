@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f5f1e8">
+<title>ぴょんぴょん畑</title>
+<link rel="manifest" href="manifest.json">
+<style>
+:root{
+  --paper:#f7f3ea; --ink:#2f312b; --muted:#727468;
+  --leaf:#647b57; --leaf2:#e6ecdf; --line:#ded9cd; --card:#fffdf8;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",sans-serif}
+.app{max-width:520px;margin:auto;min-height:100vh;padding:28px 20px 100px}
+header{margin-bottom:22px}
+h1{font-family:"Hiragino Mincho ProN","Yu Mincho",serif;font-size:30px;font-weight:600;letter-spacing:.06em;margin:0 0 6px}
+.tag{color:#575b50;font-size:14px;letter-spacing:.05em}
+.date{margin-top:15px;color:var(--muted);font-size:13px}
+.hero{background:linear-gradient(145deg,#e8eddf,#dce6d3);border-radius:20px;padding:24px 20px;margin-bottom:28px}
+.hero .small{font-family:"Yu Mincho",serif;line-height:1.9;margin-bottom:18px}
+button{font:inherit}
+.primary{width:100%;border:0;border-radius:999px;background:var(--leaf);color:white;padding:16px;font-weight:700;font-size:17px;cursor:pointer}
+section{margin:28px 0}
+.section-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+h2{font-size:20px;margin:0}
+.hint{font-size:12px;color:var(--muted)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;margin:10px 0;box-shadow:0 2px 10px rgba(40,40,30,.03)}
+.crop{display:flex;gap:12px;align-items:center}
+.icon{width:44px;height:44px;border-radius:12px;background:var(--leaf2);display:grid;place-items:center;font-size:24px}
+.crop b{display:block;margin-bottom:4px}
+.meta{font-size:13px;color:var(--muted)}
+.note{margin-top:5px;font-size:14px}
+.record{border-left:3px solid #9aab8e;padding-left:12px;line-height:1.7}
+.quote{font-family:"Yu Mincho",serif;color:#55594f;line-height:1.9;background:#eee9de;border-radius:16px;padding:18px}
+nav{position:fixed;bottom:0;left:0;right:0;background:rgba(247,243,234,.96);border-top:1px solid var(--line);backdrop-filter:blur(10px)}
+.navin{max-width:520px;margin:auto;display:grid;grid-template-columns:repeat(3,1fr);padding:10px 12px calc(10px + env(safe-area-inset-bottom))}
+.navbtn{border:0;background:none;color:#666;padding:7px;font-size:13px}
+.navbtn.active{color:#486242;font-weight:700}
+#toast{position:fixed;left:50%;bottom:90px;transform:translateX(-50%);background:#333;color:#fff;padding:10px 16px;border-radius:999px;font-size:13px;opacity:0;transition:.2s;pointer-events:none;white-space:nowrap}
+</style>
+</head>
+<body>
+<main class="app">
+<header>
+  <h1>ぴょんぴょん畑 🌱</h1>
+  <div class="tag">小さな変化に、気づく。残す。育てる。</div>
+  <div class="date">2026年9月22日（火）・2026年 秋</div>
+</header>
+
+<div class="hero">
+  <div class="small">今日も、畑をのぞいてみよう。<br>きっと、何かが見つかる。</div>
+  <button class="primary" id="camera">📷　写真を撮って相談</button>
+  <input id="photo" type="file" accept="image/*" capture="environment" hidden>
+</div>
+
+<section>
+ <div class="section-head"><h2>今日、見ておきたいこと</h2><span class="hint">Ver.0.1-A</span></div>
+ <div class="card crop">
+   <div class="icon">🥕</div><div><b>大根</b><div class="meta">9月6日 種まき・16日目</div><div class="note">葉の様子を見てみましょう。</div></div>
+ </div>
+ <div class="card crop">
+   <div class="icon">🥦</div><div><b>ブロッコリー</b><div class="meta">9月20日 植え付け・2日目</div><div class="note">根づくまで、もう少し。様子を見てみましょう。</div></div>
+ </div>
+</section>
+
+<section>
+ <div class="section-head"><h2>最近の記録</h2></div>
+ <div class="card record"><span class="meta">2026年9月20日</span><br>
+ ブロッコリー、晩生キャベツ、玉レタス、立生レタスを植えました。</div>
+ <div class="card record"><span class="meta">2026年9月6日</span><br>
+ 長ネギを植え、大根・ごぼう・洋ニンジン・金時ニンジンの種をまきました。</div>
+</section>
+
+<div class="quote">土を見て、葉を見て、空を見て。<br>今日の小さな気づきを、ひとつ残しておこう。</div>
+</main>
+
+<nav><div class="navin">
+<button class="navbtn active" data-name="今日">⌂<br>今日</button>
+<button class="navbtn" data-name="畑">♧<br>畑</button>
+<button class="navbtn" data-name="記録">▤<br>記録</button>
+</div></nav>
+<div id="toast"></div>
+<script>
+const toast=(s)=>{const t=document.getElementById('toast');t.textContent=s;t.style.opacity=1;setTimeout(()=>t.style.opacity=0,1800)}
+document.getElementById('camera').onclick=()=>document.getElementById('photo').click();
+document.getElementById('photo').onchange=(e)=>{
+ if(e.target.files.length) toast('写真を選びました 🌱 次は「作物を選ぶ」を作ります');
+};
+document.querySelectorAll('.navbtn').forEach(b=>b.onclick=()=>{
+ document.querySelectorAll('.navbtn').forEach(x=>x.classList.remove('active'));
+ b.classList.add('active'); toast(b.dataset.name+'画面は次のバージョンで作ります');
+});
+</script>
+</body>
+</html>
